@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const dayDate = () => {
   const day = [
     "Sunday",

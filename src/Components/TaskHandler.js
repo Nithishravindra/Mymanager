@@ -6,7 +6,6 @@ class TaskHandler extends Component {
   };
 
   printList() {
-    // try using filter p
     console.log("print list")
     console.log(this.props.task)
     return this.props.task
@@ -35,11 +34,8 @@ class TaskHandler extends Component {
     this.setState({ newTask: rawTask });
   }
 
-
-
   render() {
     // console.log(this.props.task);
-
     return (
       <React.Fragment>
         
@@ -56,7 +52,6 @@ class TaskHandler extends Component {
               ADD TASK{" "}
             </button>
           </div>
-        
       </React.Fragment>
     );
   }
