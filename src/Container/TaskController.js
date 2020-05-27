@@ -4,6 +4,7 @@ import Date from "../Components/DateDay.js";
 import Quote from "../Components/Quote.js";
 import TaskHandler from "../Components/TaskHandler";
 import axios from "../axiosConfig";
+import classes from "./abc.css";
 
 class TaskController extends Component {
   state = {
@@ -17,10 +18,10 @@ class TaskController extends Component {
       .then((res) => {
         if (res.status === 200) {
           const dat = Object.values(res.data);
-         
-        console.log(dat)
+
+          console.log(dat);
           this.setState({
-            task: dat
+            task: dat,
           });
         } else {
           alert(`error`);
@@ -43,16 +44,13 @@ class TaskController extends Component {
   }
 
   addTask(taskname) {
-    console.log(this.state.task)
+    console.log(this.state.task);
     console.log("Task " + taskname);
     let min = 1;
     let max = 100;
     let id = (min + Math.random() * (max - min)).toFixed();
 
-    
-    let newTask = [
-      ...this.state.task
-    ];
+    let newTask = [...this.state.task];
 
     let ord = {
       id: id,
@@ -60,37 +58,39 @@ class TaskController extends Component {
       status: "Pending",
     };
 
-    newTask.push(ord)
+    newTask.push(ord);
     // console.log(newTask)
     axios.post("/task.json", ord);
-    this.setState({task: newTask})
+    this.setState({ task: newTask });
   }
 
   render() {
     console.log("fd");
     console.log(this.state.task);
 
-
     let taskload = null;
-    
-    if(this.state.task) {
-        taskload = (<TaskHandler
-        task={this.state.task}
-        addTask={this.addTask.bind(this)}
-        remove={this.remove.bind(this)}
-      />)
+
+    if (this.state.task) {
+      taskload = (
+        <TaskHandler
+          task={this.state.task}
+          addTask={this.addTask.bind(this)}
+          remove={this.remove.bind(this)}
+        />
+      );
     }
-
-
 
     return (
       <React.Fragment>
-        <Date />
-        <Quote />
-        <h1>TASK</h1>
-
-        {taskload}
-       
+        <div className={classes.abc}>
+          <Date />
+          <div  className={classes.left}>
+            <Quote />
+          </div>
+          {/* <h1>TASK</h1> */}
+          <div className={classes}
+          >{taskload}</div>
+        </div>
       </React.Fragment>
     );
   }
@@ -98,23 +98,4 @@ class TaskController extends Component {
 
 export default TaskController;
 
- // {
-      //   id: "1",
-      //   name: "Dance",
-      //   status: "Pending",
-      // },
-      // {
-      //   id: "2",
-      //   name: "instagram",
-      //   status: "Pending",
-      // },
-      // {
-      //   id: "3",
-      //   name: "ludo",
-      //   status: "Completed",
-      // },
-      // {
-      //   id: "4",
-      //   name: "guitar",
-      //   status: "Completed",
-      // },
+

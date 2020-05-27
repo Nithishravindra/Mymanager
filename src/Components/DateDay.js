@@ -1,4 +1,6 @@
 import React from "react";
+import classes from './DateDay.css';
+
 
 const dayDate = () => {
   const day = [
@@ -22,7 +24,7 @@ const dayDate = () => {
   const currDay = " " + day[tempDate.getDay()];
 
   return (
-    <div className="dateday">
+    <div className={classes.newC}>
       <p>
         {currDate} and {currDay}
       </p>
