@@ -8,7 +8,7 @@ import classes from "./abc.css";
 
 class TaskController extends Component {
   state = {
-    task: []
+    task: [],
   };
 
   componentDidMount() {
@@ -17,10 +17,8 @@ class TaskController extends Component {
       .get("https://mymanager-1589901391852.firebaseio.com/task.json")
       .then((res) => {
         if (res.status === 200) {
-          const data = Object.values(res.data);
-          // console.log(data);
           this.setState({
-            task: data,
+            task: res.data,
           });
         } else {
           alert(`error`);
@@ -29,48 +27,59 @@ class TaskController extends Component {
   }
 
   remove(taskId) {
-    let arr = [...this.state.task];
-    let i;
-    for (i of arr) {
-      // console.log(i);
-      if (i.id === taskId) {
-        // console.log(i.name);
-        i.status = "Completed";
+    let newTask = Object.assign(this.state.task);
+
+    for (let [key, value] of Object.entries(newTask)) {
+      if (value.id === taskId) {
+        value.status = "Completed";
+        let newobj = {
+          id: value.id,
+          name: value.name,
+          status: "Completed",
+        };
+        console.log(newobj);
+        axios.put(`/task/${key}.json`, newobj);
         break;
       }
     }
-    this.setState({ task: arr });
-  }
-
-  addTask(taskname) {
-    console.log("ADD TASK");
-    const reg = /[0-9]+/;
-    let len = this.state.task.length - 1;
-    let id;
-
-    if (this.state.task[len]) {
-      let text = JSON.stringify(this.state.task[len])
-      let match = text.match(reg)
-      console.log(match[0])
-      id = match[0]
-    }
-
-    let newTask = [...this.state.task];
-    let currentTask = {
-      id: id++,
-      name: taskname,
-      status: "Pending"
-    };
-
-    newTask.push(currentTask);
-    axios.post("/task.json", currentTask);
     this.setState({ task: newTask });
   }
 
+  addTask(taskname) {
+
+    console.log("ADD TASK");
+    let taskList = Object.assign(this.state.task);
+    const reg = /[0-9]+/;
+    let x = Object.values(taskList)
+    let len = Object.values(taskList).length-1;
+    let text = JSON.stringify(x[len]);
+    let match = text.match(reg);
+    let id = parseInt(match[0], 10);
+    id++;
+
+    let currentTask = {
+      id: id,
+      name: taskname,
+      status: "Pending",
+    };
+
+    let res = axios.post("/task.json", currentTask);
+    let resObj = Promise.resolve(res)
+    const promise1 = new Promise((resolve, reject) => { 
+        setTimeout(() => { 
+            resObj.then(item => {
+              let currentID = item.data.name  
+              taskList[currentID] = currentTask;
+              this.setState({task: taskList})
+            }); 
+        }, 5000); 
+    }); 
+    promise1.then();
+  }
+
   render() {
-    // console.log("fd");
     // console.log(this.state.task);
-    
+
     let taskload = null;
     if (this.state.task) {
       taskload = (
@@ -86,11 +95,10 @@ class TaskController extends Component {
       <React.Fragment>
         <div className={classes.abc}>
           <Date />
-          <div  className={classes.left}>
+          <div className={classes.left}>
             <Quote />
           </div>
-          <div className={classes}
-          >{taskload}</div>
+          <div>{taskload}</div>
         </div>
       </React.Fragment>
     );
@@ -98,5 +106,3 @@ class TaskController extends Component {
 }
 
 export default TaskController;
-
-

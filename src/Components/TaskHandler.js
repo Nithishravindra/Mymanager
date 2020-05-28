@@ -6,9 +6,9 @@ class TaskHandler extends Component {
   };
 
   printList() {
-    // console.log("print list")
-    // console.log(this.props.task)
-    return this.props.task.filter(trueTask => {
+    let task = Object.values(this.props.task)
+
+    return task.filter(trueTask => {
         if (trueTask.status === "Pending") {
             return trueTask;
         } else {
@@ -16,7 +16,6 @@ class TaskHandler extends Component {
         }
     })
     .map((item, index) => {
-        //console.log(item)
         return (
           <div key={index}>
             <li>{item.name}<br /></li>
@@ -34,10 +33,8 @@ class TaskHandler extends Component {
   }
 
   render() {
-    // console.log(this.props.task);
     return (
       <React.Fragment>
-        
            {this.printList()} 
           <div>
             <input
