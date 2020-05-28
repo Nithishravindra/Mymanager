@@ -6,11 +6,9 @@ class TaskHandler extends Component {
   };
 
   printList() {
-    console.log("print list")
-    console.log(this.props.task)
+    // console.log("print list")
+    // console.log(this.props.task)
     return this.props.task.filter(trueTask => {
-      console.log("filter")
-      console.log(trueTask)
         if (trueTask.status === "Pending") {
             return trueTask;
         } else {

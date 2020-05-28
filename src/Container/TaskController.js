@@ -17,11 +17,10 @@ class TaskController extends Component {
       .get("https://mymanager-1589901391852.firebaseio.com/task.json")
       .then((res) => {
         if (res.status === 200) {
-          const dat = Object.values(res.data);
-
-          console.log(dat);
+          const data = Object.values(res.data);
+          // console.log(data);
           this.setState({
-            task: dat,
+            task: data,
           });
         } else {
           alert(`error`);
@@ -44,32 +43,35 @@ class TaskController extends Component {
   }
 
   addTask(taskname) {
-    console.log(this.state.task);
-    console.log("Task " + taskname);
-    let min = 1;
-    let max = 100;
-    let id = (min + Math.random() * (max - min)).toFixed();
+    console.log("ADD TASK");
+    const reg = /[0-9]+/;
+    let len = this.state.task.length - 1;
+    let id;
+
+    if (this.state.task[len]) {
+      let text = JSON.stringify(this.state.task[len])
+      let match = text.match(reg)
+      console.log(match[0])
+      id = match[0]
+    }
 
     let newTask = [...this.state.task];
-
-    let ord = {
-      id: id,
+    let currentTask = {
+      id: id++,
       name: taskname,
-      status: "Pending",
+      status: "Pending"
     };
 
-    newTask.push(ord);
-    // console.log(newTask)
-    axios.post("/task.json", ord);
+    newTask.push(currentTask);
+    axios.post("/task.json", currentTask);
     this.setState({ task: newTask });
   }
 
   render() {
-    console.log("fd");
-    console.log(this.state.task);
-
+    // console.log("fd");
+    // console.log(this.state.task);
+    
     let taskload = null;
-
     if (this.state.task) {
       taskload = (
         <TaskHandler
@@ -87,7 +89,6 @@ class TaskController extends Component {
           <div  className={classes.left}>
             <Quote />
           </div>
-          {/* <h1>TASK</h1> */}
           <div className={classes}
           >{taskload}</div>
         </div>
