@@ -6,24 +6,51 @@ class TaskHandler extends Component {
   };
 
   printList() {
-    let task = Object.values(this.props.task)
+    let task = Object.values(this.props.task);
 
-    return task.filter(trueTask => {
+    return task
+      .filter((trueTask) => {
         if (trueTask.status === "Pending") {
-            return trueTask;
+          return trueTask;
         } else {
-            return 0;
+          return 0;
         }
-    })
-    .map((item, index) => {
+      })
+      .map((item, index) => {
         return (
           <div key={index}>
-            <li>{item.name}<br /></li>
+            <li>
+              {item.name}
+              <br />
+            </li>
             <button onClick={() => this.props.remove(item.id)}>
               Remove Task
             </button>
           </div>
-        )
+        );
+      });
+  }
+
+  taskCompleted() {
+
+    let task = Object.values(this.props.task);
+    return task
+      .filter((trueTask) => {
+        if (trueTask.status === "Completed") {
+          return trueTask;
+        } else {
+          return 0;
+        }
+      })
+      .map((item, index) => {
+        return (
+          <div key={index}>
+            <li>
+              {item.name}
+              <br />
+            </li>
+          </div>
+        );
       });
   }
 
@@ -35,19 +62,21 @@ class TaskHandler extends Component {
   render() {
     return (
       <React.Fragment>
-           {this.printList()} 
-          <div>
-            <input
-              type="text"
-              placeholder="Add task"
-              value={this.state.newTask}
-              onChange={this.handleChange.bind(this)}
-            />
-            <button onClick={() => this.props.addTask(this.state.newTask)}>
-              {" "}
-              ADD TASK{" "}
-            </button>
-          </div>
+        {this.printList()}
+        <div>
+          <input
+            type="text"
+            placeholder="Add task"
+            value={this.state.newTask}
+            onChange={this.handleChange.bind(this)}
+          />
+          <button onClick={() => this.props.addTask(this.state.newTask)}>
+            {" "}
+            ADD TASK{" "}
+          </button>
+          <h1>Task completed</h1>
+          {this.taskCompleted()}
+        </div>
       </React.Fragment>
     );
   }
