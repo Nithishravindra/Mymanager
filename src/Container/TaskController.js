@@ -46,59 +46,61 @@ class TaskController extends Component {
   }
 
   addTask(taskname) {
+    if (taskname.length > 0) {
+      console.log("ADD TASK");
+      let id = 0;
+      let taskList;
+      const reg = /[0-9]+/;
 
-    console.log("ADD TASK");
-    let taskList = Object.assign(this.state.task);
-    const reg = /[0-9]+/;
-    let x = Object.values(taskList)
-    let len = Object.values(taskList).length-1;
-    let text = JSON.stringify(x[len]);
-    let match = text.match(reg);
-    let id = parseInt(match[0], 10);
-    id++;
+      if (this.state.task !== null) {
+        console.log("not null ");
+        taskList = Object.assign(this.state.task);
+        console.log(taskList);
+        let x = Object.values(taskList);
+        let len = Object.values(taskList).length - 1;
+        let text = JSON.stringify(x[len]);
+        console.log("text = ", text);
+        let match = text.match(reg);
+        id = parseInt(match[0], 10);
+        id += 1;
+      }
 
-    let currentTask = {
-      id: id,
-      name: taskname,
-      status: "Pending",
-    };
+      let currentTask = {
+        id: id,
+        name: taskname,
+        status: "Pending",
+      };
 
-    let res = axios.post("/task.json", currentTask);
-    let resObj = Promise.resolve(res)
-    const promise1 = new Promise((resolve, reject) => { 
-        setTimeout(() => { 
-            resObj.then(item => {
-              let currentID = item.data.name  
-              taskList[currentID] = currentTask;
-              this.setState({task: taskList})
-            }); 
-        }, 5000); 
-    }); 
-    promise1.then();
+      let res = axios.post("/task.json", currentTask);
+      let resObj = Promise.resolve(res);
+      const promise1 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resObj.then((item) => {
+            let currentID = item.data.name;
+            taskList[currentID.toString()] = currentTask;
+            this.setState({ task: taskList });
+          });
+        }, 5000);
+      });
+      promise1.then();
+    }
   }
 
   render() {
-    // console.log(this.state.task);
-
-    let taskload = null;
-    if (this.state.task) {
-      taskload = (
-        <TaskHandler
-          task={this.state.task}
-          addTask={this.addTask.bind(this)}
-          remove={this.remove.bind(this)}
-        />
-      );
-    }
-
     return (
       <React.Fragment>
         <div className={classes.abc}>
           <Date />
-          <div className={classes.left}>
+          <div>
             <Quote />
           </div>
-          <div>{taskload}</div>
+          <div>
+            <TaskHandler
+              task={this.state.task}
+              addTask={this.addTask.bind(this)}
+              remove={this.remove.bind(this)}
+            />
+          </div>
         </div>
       </React.Fragment>
     );

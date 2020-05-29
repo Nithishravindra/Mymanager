@@ -7,7 +7,6 @@ class TaskHandler extends Component {
 
   printList() {
     let task = Object.values(this.props.task);
-
     return task
       .filter((trueTask) => {
         if (trueTask.status === "Pending") {
@@ -33,6 +32,7 @@ class TaskHandler extends Component {
 
   taskCompleted() {
 
+    this.printList()
     let task = Object.values(this.props.task);
     return task
       .filter((trueTask) => {
@@ -60,9 +60,24 @@ class TaskHandler extends Component {
   }
 
   render() {
+
+    let cond = true;
+    if ( this.props.task === null) {
+      cond = false;
+    }
+
     return (
       <React.Fragment>
-        {this.printList()}
+        <h1>Task List</h1>
+      {
+        (cond === true) ? this.printList() 
+        : null 
+      } 
+      <h1>Task completed</h1>
+      {
+        (cond === true) ? this.taskCompleted() 
+          : null 
+      } 
         <div>
           <input
             type="text"
@@ -70,14 +85,11 @@ class TaskHandler extends Component {
             value={this.state.newTask}
             onChange={this.handleChange.bind(this)}
           />
-          <button onClick={() => this.props.addTask(this.state.newTask)}>
-            {" "}
-            ADD TASK{" "}
+          <button onClick={() => this.props.addTask(this.state.newTask)}>{" "}ADD TASK{" "}
           </button>
-          <h1>Task completed</h1>
-          {this.taskCompleted()}
         </div>
       </React.Fragment>
+    
     );
   }
 }
