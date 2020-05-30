@@ -4,7 +4,7 @@ import Date from "../Components/DateDay.js";
 import Quote from "../Components/Quote.js";
 import TaskHandler from "../Components/TaskHandler";
 import axios from "../axiosConfig";
-import classes from "./abc.css";
+import classes from "./TaskController.css";
 
 class TaskController extends Component {
   state = {
@@ -79,28 +79,35 @@ class TaskController extends Component {
             let currentID = item.data.name;
             taskList[currentID.toString()] = currentTask;
             this.setState({ task: taskList });
+            window.location.reload();
           });
-        }, 5000);
+        }, 50);
       });
       promise1.then();
     }
   }
-
   render() {
     return (
       <React.Fragment>
-        <div className={classes.abc}>
-          <Date />
-          <div>
-            <Quote />
-          </div>
-          <div>
+        <div className={classes.taskbody}>
+          <header className={classes.header}>
+            <div className={classes.name}>MY MANAGER</div>
+            <div className={classes.date}>
+              <Date />
+            </div>
+          </header>
+          <main className={classes.main}>
+            <div className={classes.quote}>
+              <Quote />
+            </div>
+            <div className={classes.task}>
             <TaskHandler
-              task={this.state.task}
-              addTask={this.addTask.bind(this)}
-              remove={this.remove.bind(this)}
-            />
-          </div>
+          task={this.state.task}
+          addTask={this.addTask.bind(this)}
+          remove={this.remove.bind(this)}
+        />
+           </div>
+          </main>
         </div>
       </React.Fragment>
     );

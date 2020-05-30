@@ -1,4 +1,11 @@
 import React, { Component } from "react";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faCheck, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import classes from "./TaskHandler.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+library.add(faCheck);
+library.add(faPlusCircle);
 
 class TaskHandler extends Component {
   state = {
@@ -7,6 +14,7 @@ class TaskHandler extends Component {
 
   printList() {
     let task = Object.values(this.props.task);
+
     return task
       .filter((trueTask) => {
         if (trueTask.status === "Pending") {
@@ -18,21 +26,26 @@ class TaskHandler extends Component {
       .map((item, index) => {
         return (
           <div key={index}>
-            <li>
-              {item.name}
+            <div className={classes.list}>
+              <p className={classes.listItem}>
+                {item.name}
+                <span>
+                  <FontAwesomeIcon
+                    onClick={() => this.props.remove(item.id)}
+                    className={classes.faicon}
+                    icon="check"
+                  />
+                </span>
+              </p>
+
               <br />
-            </li>
-            <button onClick={() => this.props.remove(item.id)}>
-              Remove Task
-            </button>
+            </div>
           </div>
         );
       });
   }
 
   taskCompleted() {
-
-    this.printList()
     let task = Object.values(this.props.task);
     return task
       .filter((trueTask) => {
@@ -45,10 +58,11 @@ class TaskHandler extends Component {
       .map((item, index) => {
         return (
           <div key={index}>
-            <li>
-              {item.name}
+            <div className={classes.list}>
+              <p className={classes.listItem}>{item.name}</p>
+
               <br />
-            </li>
+            </div>
           </div>
         );
       });
@@ -60,36 +74,31 @@ class TaskHandler extends Component {
   }
 
   render() {
-
     let cond = true;
-    if ( this.props.task === null) {
+    if (this.props.task === null) {
       cond = false;
     }
-
     return (
       <React.Fragment>
-        <h1>Task List</h1>
-      {
-        (cond === true) ? this.printList() 
-        : null 
-      } 
-      <h1>Task completed</h1>
-      {
-        (cond === true) ? this.taskCompleted() 
-          : null 
-      } 
-        <div>
+        <p className={classes.heading}>Tasks for the day</p>
+        {cond === true ? this.printList() : null}
+        <div className={classes.addTask}>
           <input
+            className={classes.input}
             type="text"
             placeholder="Add task"
             value={this.state.newTask}
             onChange={this.handleChange.bind(this)}
           />
-          <button onClick={() => this.props.addTask(this.state.newTask)}>{" "}ADD TASK{" "}
-          </button>
+          <FontAwesomeIcon
+            className={classes.faicon2}
+            onClick={() => this.props.addTask(this.state.newTask)}
+            icon="plus-circle"
+          />
+          <p className={classes.heading}>Tasks Completed</p>
+          {cond === true ? this.taskCompleted() : null}
         </div>
       </React.Fragment>
-    
     );
   }
 }

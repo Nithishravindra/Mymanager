@@ -1,0 +1,97 @@
+.taskbody {
+    margin-bottom: 0px;
+    background-image: url(../assets/img/abc.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+  }
+  
+  .header {
+    /* margin: 0px 100px 0px 100px;
+  
+    height: 50px;
+    background-color: aqua;
+    align-items: center; */
+    top: 0;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    height: 20vh;
+    color: white;
+  }
+  
+  .name {
+    font-size: 34px;
+    font-weight: 500;
+    display: flex;
+    flex: 1;
+  }
+  
+  .date {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+  }
+  
+  .main {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    min-height: 80vh;
+    /* align-items: center; */
+  }
+  
+  .quote {
+    display: flex;
+    flex: 1;
+  }
+  
+  .task {
+    display: flex;
+    flex: 3;
+    padding: 20px auto;
+    flex-direction: column;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .header {
+      height: fit-content;
+      align-items: center;
+      width: 100%;
+      margin: auto;
+  
+      background-color: black;
+    }
+    .date {
+      display: none;
+    }
+    .quote {
+      margin-top: 10px;
+      border-radius: 5px;
+      width: 50%;
+    }
+    .main {
+      margin: auto;
+      background-image: none;
+      background-color: #67bcb7;
+      flex-direction: column;
+    }
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .main {
+      margin: auto;
+      background-image: none;
+      background-color: #67bcb7;
+    }
+    .quote {
+      width: 10px;
+      background-image: none;
+      background-color: #67bcb7;
+    }
+  }

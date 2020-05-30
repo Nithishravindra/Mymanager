@@ -1,0 +1,52 @@
+.list {
+    background-color: #7a9ba6;
+    width: 250px;
+    height: 50px;
+    margin: 20px auto;
+    border-radius: 3px;
+  }
+  .listItem {
+    padding: 10px;
+    /* text-align: center; */
+  }
+  
+  .list p {
+    position: relative;
+  }
+  
+  .list p span {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+  }
+  
+  .heading {
+    color: white;
+    font-weight: 500;
+    font-size: 25px;
+    width: 250px;
+    height: 50px;
+    margin: 10px auto;
+  }
+  
+  .faicon {
+    font-size: 20px;
+  }
+  
+  .addTask {
+    margin: 20px auto;
+  }
+  
+  .input {
+    margin: 20px 5px 20px 20px;
+    width: 240px;
+    height: 50px;
+    border-radius: 3px;
+    border: none;
+    padding: 10px;
+  }
+  
+  .faicon2 {
+    font-size: 20px;
+    margin-left: 1px;
+  }
