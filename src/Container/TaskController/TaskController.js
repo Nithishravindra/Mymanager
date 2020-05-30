@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-import Date from "../Components/DateDay.js";
-import Quote from "../Components/Quote.js";
-import TaskHandler from "../Components/TaskHandler";
-import axios from "../axiosConfig";
+import Date from "../../Components/DayDate/DateDay.js";
+import Quote from "../../Components/Quote/Quote.js";
+import TaskHandler from "../../Components/TaskHandler/TaskHandler";
+import axios from "../../axiosConfig";
 import classes from "./TaskController.css";
 
 class TaskController extends Component {
@@ -102,10 +102,10 @@ class TaskController extends Component {
             </div>
             <div className={classes.task}>
             <TaskHandler
-          task={this.state.task}
-          addTask={this.addTask.bind(this)}
-          remove={this.remove.bind(this)}
-        />
+            task={this.state.task}
+            addTask={this.addTask.bind(this)}
+            remove={this.remove.bind(this)}
+            />
            </div>
           </main>
         </div>

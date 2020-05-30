@@ -1,0 +1,30 @@
+.card {
+  width: 18rem;
+  border: solid 1px white;
+  border-radius: 5px;
+  display: flex;
+}
+
+.cardtext {
+  color: white;
+}
+
+.cardbody {
+  border: 1px solid;
+}
+
+.cardtitle {
+  text-align: center;
+  background-color: #67bcb7;
+  min-width: 50px;
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .card {
+    margin: auto;
+    border-radius: 10px;
+  }
+}

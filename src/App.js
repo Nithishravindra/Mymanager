@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import classes from './App.css';
-import TaskController from './Container/TaskController';
+import TaskController from './Container/TaskController/TaskController';
 
 class App extends Component {
   render() {
     return (
-      <div className={classes.Appp}>
+      <div>
         <TaskController />
       </div>
     );
