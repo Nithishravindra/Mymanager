@@ -45,7 +45,7 @@ class TaskController extends Component {
     this.setState({ task: newTask });
   }
 
-  addTask(taskname) {
+  async addTask(taskname) {
     if (taskname.length > 0) {
       console.log("ADD TASK");
       let id = 0;
@@ -71,21 +71,14 @@ class TaskController extends Component {
         status: "Pending",
       };
 
-      let res = axios.post("/task.json", currentTask);
-      let resObj = Promise.resolve(res);
-      const promise1 = new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resObj.then((item) => {
-            let currentID = item.data.name;
-            taskList[currentID.toString()] = currentTask;
-            this.setState({ task: taskList });
-            window.location.reload();
-          });
-        }, 50);
-      });
-      promise1.then();
+      let res = await axios.post("/task.json", currentTask);
+      let currentID = await res.data.name;
+      taskList[currentID.toString()] = currentTask;
+      this.setState({ task: taskList });
+      window.location.reload();
     }
   }
+
   render() {
     return (
       <React.Fragment>
