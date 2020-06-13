@@ -3,7 +3,7 @@
 A simple responsive Todo app built using [Create React App](https://github.com/facebookincubator/create-react-app) and [firebase](https://firebase.google.com/).
 
 ## To Run
- 1.  Clone this repository and go into its src folder.
+ 1.  Clone repository.
  2.  Run  `npm install`
  3.  Run  `npm run start`
 
