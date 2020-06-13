@@ -1,6 +1,4 @@
-A simple TODO application.
-
-[**MyManager **](https://github.com/nithishravindra/mymanager)
+[MyManager](https://github.com/nithishravindra/mymanager)
 -
 A simple responsive Todo app built using [Create React App](https://github.com/facebookincubator/create-react-app) and [firebase](https://firebase.google.com/).
 
