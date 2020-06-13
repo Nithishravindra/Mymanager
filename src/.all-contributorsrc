@@ -1,0 +1,36 @@
+  {
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+     {
+      "login": "Nithishravindra",
+      "name": "nithishravindra",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/36659651?v=4",
+      "profile": "http://nithishravindra.com",
+      "contributions": [
+        "ideas",
+        "code",
+        "bug",
+        "doc"
+      ]
+    },
+    {
+      "login": "poojamallikarjun",
+      "name": "Pooja Mallikarjun",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/54856822?s=400&v=4",
+      "profile": "https://github.com/PoojaMallikarjun",
+      "contributions": [
+        "ideas",
+        "bug"
+    }
+  ],
+  "contributorsPerLine": 3,
+  "projectName": "Mymanager",
+  "projectOwner": "Nithishravindra",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}
+

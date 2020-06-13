@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import Date from "../../Components/DayDate/DateDay.js";
 import Quote from "../../Components/Quote/Quote.js";
 import TaskHandler from "../../Components/TaskHandler/TaskHandler";
@@ -12,7 +11,6 @@ class TaskController extends Component {
   };
 
   componentDidMount() {
-    console.log("Component Did Mount");
     axios
       .get("https://mymanager-1589901391852.firebaseio.com/task.json")
       .then((res) => {
@@ -53,13 +51,10 @@ class TaskController extends Component {
       const reg = /[0-9]+/;
 
       if (this.state.task !== null) {
-        console.log("not null ");
         taskList = Object.assign(this.state.task);
-        console.log(taskList);
         let x = Object.values(taskList);
         let len = Object.values(taskList).length - 1;
         let text = JSON.stringify(x[len]);
-        console.log("text = ", text);
         let match = text.match(reg);
         id = parseInt(match[0], 10);
         id += 1;
